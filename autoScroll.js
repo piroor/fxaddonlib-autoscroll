@@ -6,7 +6,7 @@
                         .autoScroll
                         .processAutoScroll(mouseMoveOrDragOverEvent);
 
- license: The MIT License, Copyright (c) 2009-2012 YUKI "Piro" Hiroshi
+ license: The MIT License, Copyright (c) 2009-2014 YUKI "Piro" Hiroshi
  original:
    http://github.com/piroor/fxaddonlib-autoscroll
 */
@@ -29,7 +29,7 @@ if (typeof window == 'undefined' ||
 }
 
 (function() {
-	const currentRevision = 6;
+	const currentRevision = 7;
 
 	if (!('piro.sakura.ne.jp' in window)) window['piro.sakura.ne.jp'] = {};
 
@@ -163,8 +163,14 @@ if (typeof window == 'undefined' ||
 		getScrollBoxObject : function(aTabBrowser) 
 		{
 			var box = this.getScrollBox(aTabBrowser);
-			return (box.scrollBoxObject || box.boxObject)
-					.QueryInterface(Ci.nsIScrollBoxObject); // Tab Mix Plus
+			var boxObject = box.scrollBoxObject || box.boxObject;
+			try {
+				boxObject = boxObject.QueryInterface(Ci.nsIScrollBoxObject); // Tab Mix Plus
+			}
+			catch(e) {
+				// May not implement this interface e.g. after bug 979835
+			}
+			return boxObject;
 		},
 
 		getUpButton : function(aTabBrowser)

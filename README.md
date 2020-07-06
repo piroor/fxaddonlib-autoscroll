@@ -1,4 +1,6 @@
-# Tab Bar AutoScroll Library for Vertical and Horizontal Tab Bar
+# Tab Bar AutoScroll Library for Vertical and Horizontal Tab Bar, for Firefox older than its version 57.
+
+This project is obsolete and not maintained anymore.
 
 ## Abstract
 
